@@ -4,7 +4,7 @@
 
 Submitted by: **Britney Phan**
 
-Time spent: **X** hours spent in total
+Time spent: **4** hours spent in total
 
 ## User Stories
 
@@ -14,26 +14,27 @@ The following **required** functionality is complete:
 
 The following **optional** features are implemented:
 * [ ] Settings page to change the default tip percentage.
-* [ ] UI animations
+* [x] UI animations
 * [ ] Remembering the bill amount across app restarts (if <10mins)
 * [ ] Using locale-specific currency and currency thousands separators.
 * [ ] Making sure the keyboard is always visible and the bill amount is always the first responder. This way the user doesn't have to tap anywhere to use this app. Just launch the app and start typing.
 
 The following **additional** features are implemented:
-
-- [ ] List anything else that you can get done to improve the app functionality!
+* [x] Making sure the keyboard is visible on launch but hidden when user taps out.
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://imgur.com/a/vMQvBAg' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://imgur.com/bff2187d-236e-40c2-a4c1-58d377dda78b' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Challenges:
+* Planning on how to sync animations between the bill view and the tips view
+* I attempted to make the keypad static while animating the tips view but I couldn't figure out how to hide the tips view when the text field was empty.
 
 ## Credits
 
