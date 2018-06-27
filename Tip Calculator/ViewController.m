@@ -13,6 +13,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *tipControl;
+@property (weak, nonatomic) IBOutlet UIView *tipsView;
+@property (weak, nonatomic) IBOutlet UIView *billView;
 
 @end
 
@@ -21,14 +23,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    [self.mealBillField becomeFirstResponder];
+    self.tipsView.hidden=YES;
 }
 - (IBAction)onTap:(id)sender {
-    [self.view endEditing:YES];
+    [self.mealBillField endEditing:YES];
 }
 
 - (IBAction)onEdit:(id)sender {
+    self.tipsView.hidden=NO;
     double bill = [self.mealBillField.text doubleValue];
-    
+ 
     NSArray *percentages = @[@(0.15), @(0.2), @(0.22)];
     double tipPercentage =[percentages[self.tipControl.selectedSegmentIndex]doubleValue];
     double tip = tipPercentage * bill;
@@ -37,22 +42,33 @@
     self.totalLabel.text=[NSString stringWithFormat:@"$%.2f", total];
 }
 - (IBAction)onEditingBegin:(id)sender {
+    CGRect tipsFrame = self.tipsView.frame;
+    tipsFrame.origin.y += 80;
     [UIView animateWithDuration:0.2 animations:^{
-        self.mealBillField.frame = CGRectMake(self.mealBillField.frame.origin.x, self.mealBillField.frame.origin.y + 30, self.mealBillField.frame.size.width, self.mealBillField.frame.size.height);
+        self.tipsView.frame = tipsFrame;
     }];
-
-    [UIView animateWithDuration:1 animations:^{
-        self.tipLabel.alpha = 0;
+    CGRect newFrame = self.billView.frame;
+    newFrame.origin.y += 80;
+    [UIView animateWithDuration:0.2 animations:^{
+        self.billView.frame = newFrame;
+    }];
+    [UIView animateWithDuration:0.3 animations:^{
+        self.tipsView.alpha = 0;
     }];
 }
 - (IBAction)onEditingEnd:(id)sender {
-    CGRect newFrame = self.mealBillField.frame;
-    newFrame.origin.y -= 30;
+    CGRect newFrame = self.billView.frame;
+    newFrame.origin.y -= 80;
     [UIView animateWithDuration:0.2 animations:^{
-        self.mealBillField.frame = newFrame;
+        self.billView.frame = newFrame;
     }];
-    [UIView animateWithDuration:1 animations:^{
-        self.tipLabel.alpha = 1;
+    CGRect tipsFrame = self.tipsView.frame;
+    tipsFrame.origin.y -= 80;
+    [UIView animateWithDuration:0.2 animations:^{
+        self.tipsView.frame = tipsFrame;
+    }];
+    [UIView animateWithDuration:0.3 animations:^{
+        self.tipsView.alpha = 1;
     }];
     
 }
